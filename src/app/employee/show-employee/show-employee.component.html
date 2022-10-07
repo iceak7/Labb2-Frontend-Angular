@@ -1,0 +1,88 @@
+  <!--  Add Employee Modal -->
+  <button id="addEmployee" type="button" class="btn btn-primary float-end m-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="modalAdd()">
+    <i class="fa-solid fa-plus"></i> Add Employee
+  </button>
+
+
+
+
+<table class="table table-dark">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>PhoneNr</th>
+        <th>Address</th>
+        <th>Salary</th>
+        <th>Gender</th>
+        <th>Department</th>
+        <th>Options</th></tr>
+
+    </thead>
+    <tbody>
+        <tr *ngFor="let employee of employeeList">
+            <td>{{ employee.firstName }}</td>
+            <td>{{ employee.lastName }}</td>
+            <td>{{ employee.email }}</td>
+            <td>{{ employee.phoneNr }}</td>
+            <td>{{ employee.address }}</td>
+            <td>{{ employee.salary }}</td>
+            <td>{{ employee.gender }}</td>
+            <td>{{ departmentMap.get(employee.departmentId) }}</td>
+            <td>
+              <div class="btn-group" role="group">
+                <button class="btn btn-primary" (click)="modalEdit(employee)" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-pen-to-square"></i></button>
+                <button class="btn btn-danger " (click)="delete(employee)"><i class="fa-solid fa-trash-can"></i></button>
+              </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="alert alert-success" role="alert" id="add-success-alert">
+  Successfully added an employee!
+</div>
+<div class="alert alert-success" role="alert" id="update-success-alert">
+  Successfully updated an employee!
+</div>
+<div class="alert alert-success" role="alert" id="delete-success-alert">
+  Successfully deleted an employee!
+</div>
+
+<div class="row">
+  <div class="col-4">
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th>Departments</th>
+    </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let dep of departmentList">
+              <td>{{ dep.departmentName}}</td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+
+
+
+
+<!-- Add or edit Employee Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{modalTitle}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="modalClose()" id="add-edit-modal-close"></button>
+      </div>
+      <div class="modal-body">
+        <app-add-edit-inspection [employee]="employee" *ngIf="activateAddEditEmployeeComponent"></app-add-edit-inspection>
+      </div>
+    </div>
+  </div>
+</div>
